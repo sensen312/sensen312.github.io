@@ -40,7 +40,7 @@ const InvisibleText = styled('div')(({ theme }) => ({
     let animationCount = 0;
     
 
-    const type = async (text, speed = 20) => {
+    const type = async (text, speed = 30) => {
       for (let char of text) {
         if (!isCancelled) {
           await new Promise((resolve) =>
@@ -83,19 +83,18 @@ const InvisibleText = styled('div')(({ theme }) => ({
     const animate = async () => {
       
 
-      if (animationCount < 1) {
+      
         const words = message.split(' ');
         for (let word of words) {
         if (Math.random() < 0.1) {
           const misspelledWord = misspell(word);
-          await type(misspelledWord, 25);
+          await type(misspelledWord, 55);
           await backspace(misspelledWord, 25);
         }
         await type(word + ' ', 25);
-       }
+       
 
         animationCount++;
-        console.log(animationCount + "meowqwwwwqqqwww");
       }
       
       
@@ -103,7 +102,8 @@ const InvisibleText = styled('div')(({ theme }) => ({
 
       if (!isCancelled) {
         if (repeat) {
-            await new Promise((resolve) => setTimeout(resolve, 5000)); // Timeout before repeating
+            console.log('repeat');
+            await new Promise((resolve) => setTimeout(resolve, 4000)); // Timeout before repeating
             await deleteAll();
             animate(); // Restart the animation if repeat is true and not cancelled
           } else {
